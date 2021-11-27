@@ -6,8 +6,26 @@ import pandas as pd
 import numpy as np
 
 path_reef = 'E:/kaggle_great_barrier_reef/Great_Barrier_Reef/'
-zip_file  = 'tensorflow-great-barrier-reef.zip'
-data_path = 'data_reef'
+zip_file = 'tensorflow-great-barrier-reef.zip'
+data_path = os.path.join(path_reef, 'data_reef')
 
-with zipfile.ZipFile(path_reef+zip_file, 'r') as zip_ref:
-    zip_ref.extractall(os.path.join(path_reef,data_path))
+# with zipfile.ZipFile(path_reef + zip_file, 'r') as zip_ref:
+#     zip_ref.extractall(data_path)
+
+
+# Training and Testing dataframes
+train_csv = pd.read_csv(data_path + '/train.csv')
+test_csv = pd.read_csv(data_path + '/test.csv')
+
+# Length of the training and testing data
+print(len(train_csv))
+print(len(test_csv))
+
+# Dataframe head
+print(train_csv.head(200))
+
+# Frames with starfish
+train_real = train_csv.loc[train_csv["annotations"] != "[]"]
+
+# Dataframe head
+print(train_real.head(100))
