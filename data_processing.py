@@ -4,6 +4,8 @@ import os
 import tensorflow as tf
 import pandas as pd
 import numpy as np
+import wandb
+from PIL import Image
 
 path_reef = 'E:/kaggle_great_barrier_reef/Great_Barrier_Reef/'
 zip_file = 'tensorflow-great-barrier-reef.zip'
@@ -29,3 +31,20 @@ train_real = train_csv.loc[train_csv["annotations"] != "[]"]
 
 # Dataframe head
 print(train_real.head(100))
+
+
+# Feature Summary - copied from Diego Gomez
+def resumetable(df):
+    '''function to create feature summary'''
+    print(f'Shape: {df.shape}')
+    summary = pd.DataFrame(df.dtypes, columns=['Data Type'])
+    summary = summary.reset_index()
+    summary = summary.rename(columns={'index': 'Features'})
+    summary['Num of Null Value'] = df.isnull().sum().values
+    summary['Num of Unique Value'] = df.nunique().values
+    summary['1st Value'] = df.loc[0].values
+    summary['2nd Value'] = df.loc[1].values
+    summary['3rd Value'] = df.loc[2].values
+    return summary
+
+resumetable(train_csv)
