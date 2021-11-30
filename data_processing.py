@@ -27,10 +27,10 @@ print(len(test_csv))
 print(train_csv.head(200))
 
 # Frames with starfish
-train_real = train_csv.loc[train_csv["annotations"] != "[]"]
+train = train_csv.loc[train_csv["annotations"] != "[]"]
 
 # Dataframe head
-print(train_real.head(100))
+print(train.head(100))
 
 
 # Feature Summary - copied from Diego Gomez
@@ -47,4 +47,4 @@ def resumetable(df):
     summary['3rd Value'] = df.loc[2].values
     return summary
 
-resumetable(train_csv)
+resumetable(train)
